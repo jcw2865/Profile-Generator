@@ -3,7 +3,11 @@ const axios = require("axios");
 const inquirer = require("inquirer");
 const util = require("util");
 const writeFileAsync = util.promisify(fs.writeFile);
+const photo = "";
+const name = "";
 const username = "";
+const bio = "";
+const location = "";
 const repoNum = "";
 const followers = "";
 const following = "";
@@ -25,11 +29,11 @@ function makeHTML() {
 
 <body>
     <div id="header">
-        <div id="photo"></div>
-        <div id="name"></div>
+        <div id="photo">${photo}</div>
+        <div id="name">${name}</div>
         <div id="username">${username}</div>
-        <div id="bio"></div>
-        <div id="location"></div>
+        <div id="bio">${bio}</div>
+        <div id="location">${location}</div>
         <div id="ghurl"></div>
         <div id="blogurl"></div>
     </div>
@@ -63,80 +67,39 @@ inquirer.prompt([
     // Create a function based off of the given username
     .then(function ({ username }) {
 
-        // Create a const for an introduction using the username
-        const greeting = `Hello, my username is ${username}. \n`;
-        fs.writeFile("data.txt", greeting, function (err) {
-            if (err) {
-                throw err;
-            }
-        })
+        // ##########
+        // AXIOS
+        // ##########
 
-        // ###############
-        // REPOS AXIOS
-        // ###############
+        // Create a const for the axios url for the github user's data
+        const userInfoUrl = `https://api.github.com/users/${username}`;
 
-        // Create a const for the axios url using github api for a user's repos
-        const reposUrl = `https://api.github.com/users/${username}/repos?per_page=100`;
-
-        // Axios request to get repo data for given username
-        axios.get(reposUrl).then(function (res) {
-
+        // Axios request to get user data for given username
+        axios.get(userInfoUrl).then(function (res) {
+            // Create a const for the user's photo
+            const photo = `<img src="${res.data.avatar_url}" alt="User Photo">`
+            console.log(photo);
+            // Create a const for the user's name
+            const name = res.data.name;
+            console.log(name);
+            // Create a const for the user's bio
+            const bio = res.data.bio;
+            console.log(bio);
+            // Create a const for the user's location
+            const location = res.data.location;
+            console.log(location);
             // Create a const for the identification of the number of repositories
-            const repoNum = "Public Repositories: " + res.data.length + ". \n";
-
-            // console.log(repoNum);
-
-            // Create a new file called "repos.txt" and add the const repoNamesStr
-            fs.appendFile("data.txt", repoNum, function (err) {
-                if (err) {
-                    throw err;
-                }
-            });
-        });
-
-        // ###############
-        // FOLLOWERS AXIOS
-        // ###############
-
-        // Create a const for a new axios url using github api for a user's followers
-        const followersUrl = `https://api.github.com/users/${username}/followers`;
-
-        // Axios request to get the follower data for a given username
-        axios.get(followersUrl).then(function (res) {
-
+            const repoNum = "Public Repositories: " + res.data.public_repos;
+            console.log(repoNum);
             // Create a const for the identification of the number of followers
-            const followers = "Followers: " + res.data.length + ". \n";
-            // console.log(followers);
+            const followers = "Followers: " + res.data.followers;
+            console.log(followers);
+            // Create a const for the identification of the number of users the given user is following
+            const following = "Following: " + res.data.following;
+            console.log(following);
 
-            // Append "repos.txt" and add the const followers
-            fs.appendFile("data.txt", followers, function (err) {
-                if (err) {
-                    throw err;
-                }
-            });
         });
 
-        // ###############
-        // FOLLOWING AXIOS
-        // ###############
-
-        // Create a const for a new axios url using github api for the number of other users the given user is following
-        const followingUrl = `https://api.github.com/users/jcw2865/following`;
-
-        // Axios request to get the following data for a given username
-        axios.get(followingUrl).then(function (res) {
-
-            // Create a const for the identification of the number of user the given user is following
-            const following = "Following: " + res.data.length + ". \n";
-            // console.log(following);
-
-            // Append "data.txt" and add the const following
-            fs.appendFile("data.txt", following, function (err) {
-                if (err) {
-                    throw err;
-                }
-            });
-        });
         const html = makeHTML();
         return writeFileAsync("index.html", html);
     })
