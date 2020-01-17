@@ -19,6 +19,7 @@
   "homepage": "https://github.com/jcw2865/Homework-9#readme",
   "dependencies": {
     "axios": "^0.19.1",
-    "inquirer": "^7.0.3"
+    "inquirer": "^7.0.3",
+    "util": "^0.12.1"
   }
 }

@@ -1,7 +1,12 @@
 const fs = require('fs');
 const axios = require("axios");
 const inquirer = require("inquirer");
-// const writeFileAsync = util.promisify(fs.writeFile);
+const util = require("util");
+const writeFileAsync = util.promisify(fs.writeFile);
+const username = "";
+const repoNum = "";
+const followers = "";
+const following = "";
 
 
 // Create a function that will generate an HTML doc
@@ -132,27 +137,10 @@ inquirer.prompt([
                 }
             });
         });
-
-        // ###############
-        // STARS AXIOS
-        // ###############
-
-        // // Create a const for a new axios url using github api for the number of stars the given user has
-        // const starsURL = `https://api.github.com/users/jcw2865/starred`;
-
-        // // Axios request to get the github stars data for a given username
-        // axios.get(starsUrl).then(function (res) {
-
-        //     // Create a const for the identification of the number of stars the given user has
-        //     const stars = "Stars: " + res.data + ". \n";
-        //     console.log(stars);
-
-        //     // Append "data.txt" and add the const stars
-        //     fs.appendFile("data.txt", stars, function (err) {
-        //         if (err) {
-        //             throw err;
-        //         }
-        //     });
-        // });
-        // makeHTML(username, repoNum, followers, following);
+        const html = makeHTML();
+        return writeFileAsync("index.html", html);
+    })
+    .catch(function (err) {
+        console.log(err);
+        console.log("Whoops, something's not right. ");
     });
