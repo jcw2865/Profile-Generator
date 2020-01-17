@@ -1,0 +1,8 @@
+followers_url: 'https://api.github.com/users/jcw2865/followers'
+
+following_url: 'https://api.github.com/users/jcw2865/following'
+
+starred_url: 'https://api.github.com/users/jcw2865/starred{/owner}{/repo}'
+
+repos_url: 'https://api.github.com/users/jcw2865/repos'
+
