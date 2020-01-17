@@ -1,33 +1,42 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style1.css">
     <title>Profile Generator</title>
 </head>
 
 <body>
-    <div id="header">
-        <div id="photo"></div>
-        <div id="name"></div>
-        <div id="username"></div>
-        <div id="bio"></div>
-        <div id="location"></div>
-        <div id="ghurl"></div>
-        <div id="blogurl"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" id="header">
+                <div class="row" id="photo">
+                    <img src="${avatar_url}" alt="User Photo">
+                </div>
+                <div class="row" id="greeting">Greeting</div>
+                <div class="row" id="name">${username}</div>
+                <div class="row" id="company">Company</div>
+                <div class="row" id="links">Links</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6" id="repos">${public_repos}</div>
+                    <div class="col-sm-6" id="followers">${followers}</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" id="ghStars">GH Stars</div>
+                    <div class="col-sm-6" id="following">${following}</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="data">
-        <div id="repositories"></div>
-        <div id="followers"></div>
-        <div id="ghStars"></div>
-        <div id="following"></div>
-    </div>
-
 </body>
 
 </html>
-    
