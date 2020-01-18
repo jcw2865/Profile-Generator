@@ -36,13 +36,14 @@ function promptUser() {
                 .get(`https://api.github.com/users/${data.username}`)
                 .then(function (response) {
                     const color = data.color;
-                    // console.log(color);
+                    // console.log(response.data);
                     data.name = response.data.name;
                     data.public_repos = response.data.public_repos;
                     data.followers = response.data.followers;
                     data.following = response.data.following;
                     data.avatar_url = response.data.avatar_url;
                     data.location = response.data.location;
+                    const locationLink = "https://google.com/maps/places/" + data.location;
                     data.company = response.data.company;
                     data.bio = response.data.bio;
                     makePDF(data);
