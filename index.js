@@ -4,8 +4,8 @@ const axios = require("axios");
 function makePDF(data) {
     let options = { format: "Letter" };
     let pdf = require("html-pdf");
-    data.style = fs.readFileSync("style.css");
     let html = fs.readFileSync("index.html");
+    data.style = fs.readFileSync("style.css");
     pdf
         .create(
             html.toString().replace(/\${([^}]*)}/g, (r, k) => data[k]),
@@ -35,7 +35,8 @@ function promptUser() {
             axios
                 .get(`https://api.github.com/users/${data.username}`)
                 .then(function (response) {
-                    console.log(response.data);
+                    const color = data.color;
+                    // console.log(color);
                     data.name = response.data.name;
                     data.public_repos = response.data.public_repos;
                     data.followers = response.data.followers;
@@ -43,6 +44,7 @@ function promptUser() {
                     data.avatar_url = response.data.avatar_url;
                     data.location = response.data.location;
                     data.company = response.data.company;
+                    data.bio = response.data.bio;
                     makePDF(data);
                 });
         });
