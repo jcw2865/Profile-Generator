@@ -1,5 +1,5 @@
-# Homework-9
-Homework-9
+# Profile Generator
+Profile Generator 
 
 The purpose of this project was to build a command line application that prompts the user for their favorite color and their GitHub username. The program would then take the user's input and produce a PDG with information from the user's GitHub, styled with their favorite color. The criteria for a successful program are below: 
 
@@ -17,7 +17,7 @@ The deployed project should look like this.
 
 Below is the link to the project repository followed by the link to the PDF generated for me. 
 
-https://github.com/jcw2865/homework-9
+https://github.com/jcw2865/Profile-Generator
 
 https://drive.google.com/drive/u/0/folders/1zbrokYYLcrQsrTtnE-xKfYFROUL9LEVE
 
